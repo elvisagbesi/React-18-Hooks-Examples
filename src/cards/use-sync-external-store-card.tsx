@@ -1,5 +1,4 @@
-import { useState, useEffect, useTransition, useSyncExternalStore } from "react"
-import { fetchData } from "../helpers/fetch-data"
+import { useSyncExternalStore } from "react"
 import Button from "../components/button";
 import { todosStore } from "../helpers/todo-store";
 
@@ -12,10 +11,10 @@ export default function UseSyncExternalStoreComponent() {
   function subscribeOnlineState(callback: any){
     console.log({callback})
     window.addEventListener('online',callback)
-    window.addEventListener('online',callback)
+    window.addEventListener('offline',callback)
     return () => {
       window.removeEventListener('online',callback)
-      window.removeEventListener('online',callback)
+      window.removeEventListener('offline',callback)
     }
   }
 
