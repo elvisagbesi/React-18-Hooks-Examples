@@ -3,39 +3,27 @@ import { fetchData } from "../helpers/fetch-data"
 
 export default function UseDeferredValueComponent() {
 
+  const [items, setItems] = useState<any[]>([]);
+  const [itemsDeferred, setItemsDeferred] = useState<any[]>([]);
+
   const [query, setQuery] = useState("")
   const deferredQuery = useDeferredValue(query)
 
-  const [items, setItems] = useState<any[]>([]);
-  const [itemsAlt, setItemsAlt] = useState<any[]>([]);
-
-  const getData = async () => {
-    const results = await fetchData(deferredQuery)
-    setItems(results)
-  }
-
-  const getDataAlt = async () => {
-    const results = await fetchData(query)
-    setItemsAlt(results)
-  }
-
   useEffect(() => {
-    getData()
+    fetchData(deferredQuery).then((results) => {
+      setItemsDeferred(results)
+    })
   }, [deferredQuery]);
 
   useEffect(() => {
-    setItemsAlt([])
-    getDataAlt()
+    fetchData(query).then((results) => {
+      setItems(results)
+    })
   }, [query]);
-
-
-
 
   return (
     <>
       <div className="card flex flex-col space-y-20">
-
-
         <div className="flex flex-row justify-center">
           <input type="text" onChange={(e) => setQuery(e.target.value)} />
         </div>
@@ -43,27 +31,34 @@ export default function UseDeferredValueComponent() {
         <div className="flex flex-row space-x-5 justify-center">
 
           <div>
-            <h3 className="underline">With Deferred</h3>
+            <h2 className="underline">With Deferred ✅</h2>
             <Suspense fallback={<div>Loading ....</div>}>
-              <ol>
-                {
-                  items?.map((item) => <li>{item?.name}</li>)
-                }
-              </ol>
-            </Suspense>
+              {
+                items?.length ? <ol>
+                  {
+                    items?.map((item) => <li key={item?.key}>{item?.name}</li>)
+                  }
+                </ol>
+                  :
+                  <div>No Items to display</div>
+              }
 
+            </Suspense>
           </div>
 
           <div>
-            <h3 className="underline">Without Deferred</h3>
+            <h2 className="underline">Without Deferred ❌</h2>
             <Suspense fallback={<div>Loading ....</div>}>
-              <ol>
-                {
-                  itemsAlt?.map((item) => <li>{item?.name}</li>)
-                }
-              </ol>
+              {
+                itemsDeferred?.length ? <ol>
+                  {
+                    itemsDeferred?.map((item) => <li key={item?.key}>{item?.name}</li>)
+                  }
+                </ol>
+                  :
+                  <div>No Items to display</div>
+              }
             </Suspense>
-
           </div>
 
         </div>

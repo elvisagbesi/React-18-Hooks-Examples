@@ -2,15 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .logos img {
-    @apply w-40 h-40
+    @apply w-40 h-40;
   }
 
+  input {
+    @apply text-black;
+  }
+
+  li {
+    @apply text-xl;
+  }
 
 }
-
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
