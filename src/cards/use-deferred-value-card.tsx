@@ -9,6 +9,8 @@ export default function UseDeferredValueComponent() {
   const [query, setQuery] = useState("")
   const deferredQuery = useDeferredValue(query)
 
+  const isStale = query !== deferredQuery
+
   useEffect(() => {
     fetchData(deferredQuery).then((results) => {
       setItemsDeferred(results)
@@ -36,7 +38,7 @@ export default function UseDeferredValueComponent() {
               {
                 items?.length ? <ol>
                   {
-                    items?.map((item) => <li key={item?.key}>{item?.name}</li>)
+                    items?.map((item) => <li className={`${isStale && "text-gray-700"}`} key={item?.key}>{item?.name}</li>)
                   }
                 </ol>
                   :
