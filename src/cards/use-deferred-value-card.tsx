@@ -38,13 +38,12 @@ export default function UseDeferredValueComponent() {
               {
                 items?.length ? <ol>
                   {
-                    items?.map((item) => <li className={`${isStale && "text-gray-700"}`} key={item?.key}>{item?.name}</li>)
+                    items?.map((item) => <li style={{opacity: isStale ? 0.3 : 1}} className={`${isStale && "text-gray-700"}`} key={item?.key}>{item?.name}</li>)
                   }
                 </ol>
                   :
                   <div>No Items to display</div>
               }
-
             </Suspense>
           </div>
 

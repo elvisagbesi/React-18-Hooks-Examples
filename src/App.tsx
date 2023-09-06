@@ -14,14 +14,11 @@ type PageOptions = "USE_STATE" | "USE_DEFERRED_VALUE" | "USE_TRANSITION" | "USE_
 function App() {
 
   const [page, setPage] = useState<PageOptions>("USE_STATE");
-
   const [isPending, startTransition] = useTransition()
 
   const handleTabChange = (page: string) => {
     startTransition(() => {
-
       setPage(page as any)
-
     })
   }
 
@@ -49,26 +46,12 @@ function App() {
       {
         isPending ? <h1>Transitioning....</h1> :
           <>
-            {
-              page === "USE_STATE" && <UseStateComponent />
-            }
-
-            {
-              page === "USE_DEFERRED_VALUE" && <UseDeferredValueComponent />
-            }
-
-            {
-              page === "USE_SYNC_EXTERNAL_STORE" && <UseSyncExternalStoreComponent />
-            }
-
-            {
-              page === "USE_ID" && <UseIdComponent />
-            }
-
+            {page === "USE_STATE" && <UseStateComponent />}
+            {page === "USE_DEFERRED_VALUE" && <UseDeferredValueComponent />}
+            {page === "USE_SYNC_EXTERNAL_STORE" && <UseSyncExternalStoreComponent />}
+            {page === "USE_ID" && <UseIdComponent />}
           </>
       }
-
-
     </>
   )
 }

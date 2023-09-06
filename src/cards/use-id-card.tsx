@@ -17,15 +17,12 @@ export default function UseIdComponent() {
           <div className="flex flex-row space-x-5  justify-center ">
             <div className="space-y-6">
               {
-                fruitJuices?.map((item) => <Checkbox key={item.key} label={item.value} name={item?.key} />)
+                fruitJuices?.map((item) =>
+                  <Checkbox key={item.key} label={item.value} name={item?.key} />
+                )
               }
             </div>
           </div>
-        </section>
-        
-        <section>
-          <h2>User Form</h2>
-          <UserForm />
         </section>
       </div>
     </>

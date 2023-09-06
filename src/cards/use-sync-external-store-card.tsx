@@ -8,20 +8,19 @@ export default function UseSyncExternalStoreComponent() {
     return navigator.onLine
   }
 
-  function subscribeOnlineState(callback: any){
-    console.log({callback})
-    window.addEventListener('online',callback)
-    window.addEventListener('offline',callback)
+  function subscribeOnlineState(callback: any) {
+    window.addEventListener('online', callback)
+    window.addEventListener('offline', callback)
     return () => {
-      window.removeEventListener('online',callback)
-      window.removeEventListener('offline',callback)
+      window.removeEventListener('online', callback)
+      window.removeEventListener('offline', callback)
     }
   }
 
+  const networkStatus = useSyncExternalStore(subscribeOnlineState, getOnlineSnapshot);
 
   const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
 
-  const networkStatus = useSyncExternalStore(subscribeOnlineState, getOnlineSnapshot);
 
 
   return (
@@ -30,7 +29,7 @@ export default function UseSyncExternalStoreComponent() {
         <div className="border border-gray-600/50 p-5">
 
           <h4>{networkStatus ? "ONLINE" : "OFFLINE"}</h4>
-          
+
         </div>
         <div className="border border-gray-600/50 p-5">
           <div>
