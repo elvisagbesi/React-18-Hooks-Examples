@@ -8,8 +8,9 @@ import UseDeferredValueComponent from './cards/use-deferred-value-card'
 import UseSyncExternalStoreComponent from './cards/use-sync-external-store-card'
 import { replaceUnderscoresWithSpaces } from './helpers/utils'
 import UseIdComponent from './cards/use-id-card'
+import UseCustomComponent from './cards/use-custom-card'
 
-type PageOptions = "USE_STATE" | "USE_DEFERRED_VALUE" | "USE_TRANSITION" | "USE_SYNC_EXTERNAL_STORE" | "USE_ID"
+type PageOptions = "USE_STATE" | "USE_DEFERRED_VALUE" | "USE_TRANSITION" | "USE_SYNC_EXTERNAL_STORE" | "USE_ID" | "USE_CUSTOM"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
   const handleTabChange = (page: string) => {
     startTransition(() => {
       setPage(page as any)
+      debugger
     })
   }
 
@@ -41,6 +43,7 @@ function App() {
         <Button label='useDeferredValue' onClick={() => handleTabChange("USE_DEFERRED_VALUE")} />
         <Button label='useSyncExternalStore' onClick={() => handleTabChange("USE_SYNC_EXTERNAL_STORE")} />
         <Button label='useId' onClick={() => handleTabChange("USE_ID")} />
+        <Button label='useCustom' onClick={() => handleTabChange("USE_CUSTOM")} />
       </div>
 
       {
@@ -50,6 +53,7 @@ function App() {
             {page === "USE_DEFERRED_VALUE" && <UseDeferredValueComponent />}
             {page === "USE_SYNC_EXTERNAL_STORE" && <UseSyncExternalStoreComponent />}
             {page === "USE_ID" && <UseIdComponent />}
+            {page === "USE_CUSTOM" && <UseCustomComponent />}
           </>
       }
     </>

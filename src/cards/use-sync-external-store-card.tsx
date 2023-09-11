@@ -2,6 +2,7 @@ import { useSyncExternalStore } from "react"
 import Button from "../components/button";
 import { todosStore } from "../helpers/todo-store";
 
+
 export default function UseSyncExternalStoreComponent() {
 
   function getOnlineSnapshot() {
@@ -20,7 +21,6 @@ export default function UseSyncExternalStoreComponent() {
   const networkStatus = useSyncExternalStore(subscribeOnlineState, getOnlineSnapshot);
 
   const todos = useSyncExternalStore(todosStore.subscribe, todosStore.getSnapshot);
-
 
 
   return (
